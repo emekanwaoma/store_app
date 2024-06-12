@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  web:
+    container_name: store_app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    
+    image: store_app:v1
+    environment:
+      - PORT=8000
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    expose:
+      - 5432
+    volumes:
+      - ./static:/app/static/
+      - ./media:/app/media/
+    depends_on:
+      - db
+
+  db:
+    container_name: store_db
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+
+  tests:
+    build: .
+    command: ["sh", "-c", "/opt/venv/bin/python manage.py test"]
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

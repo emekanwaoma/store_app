@@ -1,0 +1,18 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.12.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        args: ['--line-length', '119', '--preview']
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.7
+    hooks:
+      - id: ruff
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.15.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+        additional_dependencies:
+          ['@commitlint/config-conventional', '@commitlint/cli']

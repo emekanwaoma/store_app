@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  web:
+    container_name: store_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: store_app:v1
+    environment:
+      - PORT=8000
+    env_file:
+      - .env
+    expose:
+      - 5432
+      - 8000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./static:/app/static/
+      - ./media:/app/media/
+      - gunicorn-logs:/var/log/gunicorn
+    
+  nginx:
+    container_name: store_nginx
+    build: ./nginx
+    volumes:
+      - ./static:/app/static/
+      - ./media:/app/media/
+      - ./.env:/etc/nginx/.env
+
+    ports:
+      - 1337:8000
+    depends_on:
+      - web
+
+  tests:
+    container_name: store_tests
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: store_app:v1
+    command: ["sh", "-c", "python manage.py migrate && python manage.py test"]
+    environment:
+      - PORT=8000
+    env_file:
+      - .env
+    volumes:
+      - ./static:/app/static/
+      - ./media:/app/media/
+    depends_on:
+      - web
+
+volumes:
+  gunicorn-logs:
