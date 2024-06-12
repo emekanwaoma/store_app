@@ -152,11 +152,4 @@ REST_FRAMEWORK = {
 SWAGGER_SETTINGS = {
     "SWAGGER_DEFAULT_MODEL_INSPECTOR": "drf_yasg.inspectors.InspectAPISchema",
     "SWAGGER_AUTO_SCHEMA": True,
-    "SECURITY_DEFINITIONS": {
-        "Auth Token eg [Bearer (JWT)]": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-        },
-    },
 }

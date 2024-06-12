@@ -16,11 +16,11 @@ start_local:
 	docker compose up --build
 
 down_local:
-	docker compose -f docker-compose-local.yml down
+	docker compose down
 	
 start:
 	docker compose docker-compose.prod.yml up -d --build
 
 down:
-	docker compose -f docker-compose-local.yml down
+	docker compose docker-compose-local.yml down
 
