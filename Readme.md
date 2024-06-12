@@ -26,7 +26,7 @@ This API is developed to manage the inventory and suppliers for an online store.
 ### Setup
 Setting up the project is as simple as following these steps:
 
-3. Create a `.env.local` file, using `.env.sample` as a guide.
+3. Create a `.env` file, using `.env.sample` as a guide.
 
 4. Install Precommit with this command:
 
@@ -47,11 +47,11 @@ Setting up the project is as simple as following these steps:
 6. 
     ### Run
     ```bash
-    just start
+    just start_local
     ```
     ### Clean up
     ```bash
-    just down
+    just down_local
     ```
 
 ### Test
