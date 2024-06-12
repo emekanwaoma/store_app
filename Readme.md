@@ -57,15 +57,11 @@ Setting up the project is as simple as following these steps:
 ### Test
 To run tests without Docker, run:
 
-    ```bash
     python manage.py tests
-    ```
 
 While tests will run on docker builds, you can also run tests using these commands:
 
-    ```bash
     docker-compose run --rm tests
-    ```
 
 ### Pre-commit
 It is recommended to run your code against the pipeline of linting tolls and formatters before committing your code. This can be done by running the following command:
